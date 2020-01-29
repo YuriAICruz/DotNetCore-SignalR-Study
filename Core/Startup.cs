@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Models;
 using WebServerStudy.Core.Hub;
 
 namespace WebServerStudy.Core
@@ -28,6 +29,8 @@ namespace WebServerStudy.Core
             
             services.AddMvc().AddApplicationPart(controllerAssembly).AddControllersAsServices();
             services.AddSignalR();
+
+            services.AddSingleton<IPlayerRepository, MockPlayerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
