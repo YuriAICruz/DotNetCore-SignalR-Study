@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServerStudy", "WebServerStudy\WebServerStudy.csproj", "{FBEC4707-5AD1-43CE-B809-3A6EAA4A6725}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FBEC4707-5AD1-43CE-B809-3A6EAA4A6725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{A7711DA6-2C5E-416C-8646-AE3EA36E8D6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{FBEC4707-5AD1-43CE-B809-3A6EAA4A6725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBEC4707-5AD1-43CE-B809-3A6EAA4A6725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBEC4707-5AD1-43CE-B809-3A6EAA4A6725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7711DA6-2C5E-416C-8646-AE3EA36E8D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7711DA6-2C5E-416C-8646-AE3EA36E8D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7711DA6-2C5E-416C-8646-AE3EA36E8D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7711DA6-2C5E-416C-8646-AE3EA36E8D6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
