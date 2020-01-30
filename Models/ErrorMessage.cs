@@ -8,9 +8,9 @@ namespace WebServerStudy.Models
     {
         public IEnumerable<string> Errors { get; set; }
 
-        public ErrorMessage(IEnumerable<IdentityError> errors)
+        public ErrorMessage(IEnumerable<string> errors)
         {
-            Errors = errors.Select(x => x.ToString());
+            Errors = errors;
         }
 
         public ErrorMessage(string message)

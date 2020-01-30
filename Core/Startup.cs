@@ -30,8 +30,6 @@ namespace WebServerStudy.Core
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-//            if (env.IsDevelopment())
-//            {
 //                services.AddCors(options =>
 //                {
 //                    options.AddPolicy("AllowAll",
@@ -44,10 +42,16 @@ namespace WebServerStudy.Core
 //                                .AllowCredentials();
 //                        });
 //                });
-//            }
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             services.AddDbContextPool<AppDbContext>(options =>
             {
