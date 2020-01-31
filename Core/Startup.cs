@@ -66,6 +66,7 @@ namespace WebServerStudy.Core
             app.UseMvc();
 
             app.UseSignalR(routes => { routes.MapHub<ChatHub>("/chat"); });
+            app.UseSignalR(routes => { routes.MapHub<PeerToServerHub>("/networking"); });
 
             app.UseMiddleware<NotFoundMiddleware>();
         }
