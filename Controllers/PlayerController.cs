@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebServerStudy.Models;
@@ -32,6 +33,8 @@ namespace WebServerStudy.Controllers
         }
         
         [HttpPost]
+        //[Authorize(Roles = "RoleName")]
+        [Authorize]
         public JsonResult SignUpPlayer([FromBody] Player player)
         {
             Console.WriteLine(player.Id);
