@@ -22,6 +22,18 @@ namespace WebServerStudy.Controllers
             _signInManager = signInManager;
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetSelf()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                return Json(new UserViewModel(user.UserName, user.Email));
+            }
+            
+            return Json(new ErrorMessage("Not logged in"));
+        }
+
 
         [HttpPost]
         [Route("SignUp")]
