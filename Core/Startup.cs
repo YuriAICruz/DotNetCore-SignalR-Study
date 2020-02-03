@@ -50,6 +50,7 @@ namespace WebServerStudy.Core
 
             //services.AddSingleton<IPlayerRepository, MockPlayerRepository>();
             services.AddScoped<IPlayerRepository, SqlLitePlayerRepository>();
+            services.AddScoped<ICharacterRepository, SqLiteCharacterRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -68,7 +69,7 @@ namespace WebServerStudy.Core
             app.UseSignalR(routes => { routes.MapHub<ChatHub>("/chat"); });
             app.UseSignalR(routes => { routes.MapHub<PeerToServerHub>("/networking"); });
 
-            app.UseMiddleware<NotFoundMiddleware>();
+            //app.UseMiddleware<NotFoundMiddleware>();
         }
     }
 }
