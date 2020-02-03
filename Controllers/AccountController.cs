@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,10 @@ namespace WebServerStudy.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<JsonResult> GetSelf()
         {
-            if (_signInManager.IsSignedIn(User))
+            if (User != null && _signInManager.IsSignedIn(User))
             {
                 var user = await _userManager.GetUserAsync(User);
                 return Json(new UserViewModel(user.UserName, user.Email));
