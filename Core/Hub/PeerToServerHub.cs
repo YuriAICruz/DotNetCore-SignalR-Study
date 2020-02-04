@@ -24,12 +24,14 @@ namespace WebServerStudy.Core.Hub
 
             _connections.Add(name, id);
 
-            Clients.All.SendAsync("OnConnected", name, id);
-            
-            foreach (var client in _connections.Clients)
+            Clients.All.SendAsync("OnConnected", name, id).ContinueWith((tast) =>
             {
-                Clients.Client(id).SendAsync("OnClientUpdate", client);
-            }
+                foreach (var client in _connections.Clients)
+                {
+                    Clients.Client(id).SendAsync("OnClientUpdate", client);
+                }
+            });
+            
 
             return base.OnConnectedAsync();
         }
