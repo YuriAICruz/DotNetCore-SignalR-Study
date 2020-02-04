@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebServerStudy.Controllers.ModelView
+namespace Graphene.SharedModels.ModelView
 {
     public class LoginModelView
     {
@@ -14,5 +14,17 @@ namespace WebServerStudy.Controllers.ModelView
         [Required]
         [DefaultValue(false)]
         public bool IsPersistent { get; set; }
+        
+        public LoginModelView(string userName, string password, bool isPersistent = false)
+        {
+            UserName = userName;
+            Password = password;
+            IsPersistent = isPersistent;
+        }
+
+        public override string ToString()
+        {
+            return $"UserName: {UserName}";
+        }
     }
 }

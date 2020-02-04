@@ -1,7 +1,4 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
-
-namespace WebServerStudy.Controllers.ModelView
+﻿namespace Graphene.SharedModels.ModelView
 {
     public class UserViewModel
     {

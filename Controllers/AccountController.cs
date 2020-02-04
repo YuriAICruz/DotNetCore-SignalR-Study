@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Graphene.SharedModels.ModelView;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using WebServerStudy.Controllers.ModelView;
 using WebServerStudy.Models;
 
 namespace WebServerStudy.Controllers

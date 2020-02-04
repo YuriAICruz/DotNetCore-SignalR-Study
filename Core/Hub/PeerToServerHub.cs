@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 using Graphene.SharedModels.Network;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace WebServerStudy.Core.Hub
 {
     public class PeerToServerHub : Microsoft.AspNetCore.SignalR.Hub
     {
-        private NetworkClients _connections = new NetworkClients();
+        private readonly NetworkClients _connections;
 
-        [Authorize]
-        public void SendToAll(string handler, Guid id, string jsonData)
+        public PeerToServerHub()
         {
-            Clients.All.SendAsync(handler, id, jsonData);
+            _connections = new NetworkClients("");
         }
-
+        
         public override Task OnConnectedAsync()
         {
             string name = Context.User.Identity.Name;
@@ -25,6 +25,11 @@ namespace WebServerStudy.Core.Hub
             _connections.Add(name, id);
 
             Clients.All.SendAsync("OnConnected", name, id);
+            
+            foreach (var client in _connections.Clients)
+            {
+                Clients.Client(id).SendAsync("OnClientUpdate", client);
+            }
 
             return base.OnConnectedAsync();
         }
@@ -35,28 +40,51 @@ namespace WebServerStudy.Core.Hub
             string id = Context.ConnectionId;
 
             _connections.Remove(name, id);
-            
-            Clients.All.SendAsync("OnDisconnected", name, id);
-            
+
+            try
+            {
+                Clients.All.SendAsync("OnDisconnected", name, id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             return base.OnDisconnectedAsync(exception);
         }
 
+
         [Authorize]
-        public void ConnectionInfo(string name)
+        public void SendToAll(string handler, string userId, string jsonData)
         {
-            Console.WriteLine(
-                "----------------------------------------" + name + "  -  " + Clients.User(name));
-            //Clients.AllExcept(name).SendAsync("OnConnected", name);
+            Clients.All.SendAsync(handler, userId, jsonData);
         }
+
+        [Authorize]
+        public void SendToAllFromId(string handler, Guid id, string jsonData)
+        {
+            Clients.All.SendAsync(handler, id, jsonData);
+        }
+
+        [Authorize]
+        public void UpdatePlayer(NetworkClient client)
+        {
+            _connections.Update(client);
+
+            Clients.All.SendAsync("OnClientUpdate", client);
+        }
+
 
         [Authorize]
         public void SendToRoom()
         {
+            throw new NotImplementedException();
         }
 
         [Authorize]
         public void SendToPlayer()
         {
+            throw new NotImplementedException();
         }
     }
 }

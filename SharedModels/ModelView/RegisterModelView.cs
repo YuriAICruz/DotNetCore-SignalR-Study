@@ -1,12 +1,16 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebServerStudy.Controllers.ModelView
+namespace Graphene.SharedModels.ModelView
 {
     public class RegisterModelView : LoginModelView
     {
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        
+        public RegisterModelView(string userName, string email, string password, bool isPersistent = false) : base(userName, password, isPersistent)
+        {
+            Email = email;
+        }
     }
 }

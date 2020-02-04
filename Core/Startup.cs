@@ -51,6 +51,7 @@ namespace WebServerStudy.Core
             //services.AddSingleton<IPlayerRepository, MockPlayerRepository>();
             services.AddScoped<IPlayerRepository, SqlLitePlayerRepository>();
             services.AddScoped<ICharacterRepository, SqLiteCharacterRepository>();
+            services.AddSingleton<PeerToServerHub, PeerToServerHub>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
